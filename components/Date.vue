@@ -2,7 +2,7 @@
   <div class="shift-date">
     <div class="d-flex justify-content-between align-items-center">
       <span>Selected date: {{ data.date.toLocaleDateString() }}</span>
-      <b-btn-close @click=""/>
+      <b-btn-close @click="deleteDate()"/>
     </div>
 
     <b-card class="mb-5 bg-secondary text-light">
@@ -60,11 +60,10 @@
         <b-form-select
           id="shiftType"
           v-model="data.type"
-          :options="options">
-
+          :options="options"
+          required>
         </b-form-select>
       </b-form-group>
-
     </b-card>
   </div>
 </template>
@@ -81,15 +80,14 @@ export default {
   },
   data() {
     return {
-      data: {}
+      data: {},
     }
   },
   created() {
-    console.log(this.value);
     this.data = {
       startTime: '',
       endTime: '',
-      type: '',
+      type: null,
       price: 0,
       ...this.$attrs.value
     };

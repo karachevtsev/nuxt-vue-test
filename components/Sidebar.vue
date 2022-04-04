@@ -8,6 +8,7 @@
           type="text"
           placeholder="Tile"
           required
+          maxlength="100"
         ></b-form-input>
       </b-form-group>
 
@@ -26,8 +27,9 @@
           id="dates"
           v-model="dates"
           class="w-100"
-          format="YYYY-MM-DD"
-          multiple>
+          format="DD-MM-YYYY"
+          multiple
+          :inputAttr="{required:true}">
         </date-picker>
       </b-form-group>
 
@@ -36,7 +38,6 @@
       <b-button v-if="this.item" variant="outline-danger" type="button" @click="removeShift">Delete shift</b-button>
       <b-button variant="outline-primary" type="submit">Save shift</b-button>
     </b-form>
-
   </b-card>
 </template>
 
@@ -50,16 +51,16 @@ export default {
     DatePicker
   },
   props: {
-    item:{required:false}
+    item: {required: false}
   },
   name: "Sidebar",
   data() {
     return {
-      data:{
-      title: '',
-      description: '',
-      datePicker: [],
-      dates: []
+      data: {
+        title: '',
+        description: '',
+        datePicker: [],
+        dates: []
       },
       dates: []
     }
@@ -71,13 +72,13 @@ export default {
       datePicker: [],
       dates: []
     }
-    this.dates = this.data.dates.map(date=>date.date)
+    this.dates = this.data.dates.map(date => date.date)
   },
-  watch:{
-    dates(value){
+  watch: {
+    dates(value) {
       this.data.dates = value.reduce(
-        (dates,date) => dates.concat(this.data.dates.find(data=>data.date = date) || {date})
-        ,[])
+        (dates, date) => dates.concat(this.data.dates.find(data => data.date = date) || {date})
+        , [])
     }
   },
   methods: {
@@ -86,7 +87,7 @@ export default {
       addShift: 'shifts/add'
     }),
     store() {
-      this.item ? this.editShift(this.data): this.addShift(this.data)
+      this.item ? this.editShift(this.data) : this.addShift(this.data)
       this.$emit('saved')
     },
     removeShift() {

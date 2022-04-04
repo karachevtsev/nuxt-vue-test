@@ -47,5 +47,6 @@ export default {
 .shift-dates-list {
   list-style: none;
   padding: 0;
+  font-size: 12px;
 }
 </style>
