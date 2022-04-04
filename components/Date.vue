@@ -108,12 +108,6 @@ export default {
     data(value) {
       this.$emit('input', this.data)
     },
-    // value: {
-    //   handle(value) {
-    //     this.data = value ? value : {};
-    //   },
-    //   immediate: true
-    // }
   }
 }
 </script>
